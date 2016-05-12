@@ -49,6 +49,8 @@
 #define FL_NO_KNOCKBACK			0x00000800
 #define FL_POWER_ARMOR			0x00001000	// power armor (if any) is active
 #define FL_RESPAWN				0x80000000	// used for item respawning
+#define FL_BOOTS                0x00002000
+//jo83 part 2 moon boots?
 
 
 #define	FRAMETIME		0.1
@@ -1087,7 +1089,7 @@ struct edict_s
 	int			style;			// also used as areaportal number
 
 	gitem_t		*item;			// for bonus items
-
+		int			ClassSpeed; //jo83 devel
 	// common data blocks
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;

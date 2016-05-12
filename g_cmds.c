@@ -396,6 +396,7 @@ void Cmd_Use_f (edict_t *ent)
 	if (!ent->client->pers.inventory[index])
 	{
 		gi.cprintf (ent, PRINT_HIGH, "Out of item: %s\n", s);
+		gi.cprintf (ent, PRINT_HIGH, "Out of item: %d\n", index);
 		return;
 	}
 

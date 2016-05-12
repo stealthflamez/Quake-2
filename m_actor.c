@@ -437,7 +437,7 @@ void SP_misc_actor (edict_t *self)
 
 	self->pain = actor_pain;
 	self->die = actor_die;
-
+	
 	self->monsterinfo.stand = actor_stand;
 	self->monsterinfo.walk = actor_walk;
 	self->monsterinfo.run = actor_run;

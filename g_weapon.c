@@ -1,6 +1,4 @@
 #include "g_local.h"
-
-
 /*
 =================
 check_dodge
@@ -432,9 +430,13 @@ static void Grenade_Explode (edict_t *ent)
 
 	G_FreeEdict (ent);
 }
-
+//jo83 gernade touch mod this for catching DONE
 static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)
 {
+	
+	//	else if (item->tag == AMMO_GRENADES)
+		
+
 	if (other == ent->owner)
 		return;
 
@@ -459,7 +461,13 @@ static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurfa
 		}
 		return;
 	}
-
+	if(other->client->pers.inventory[12] == 0)	
+	{
+		G_FreeEdict (ent);
+		other->client->pers.inventory[12]++;
+		return;
+	}
+	
 	ent->enemy = other;
 	Grenade_Explode (ent);
 }
@@ -496,7 +504,7 @@ void fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int s
 
 	gi.linkentity (grenade);
 }
-
+//jo83 change arc possibly
 void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius, qboolean held)
 {
 	edict_t	*grenade;
@@ -505,7 +513,7 @@ void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int 
 
 	vectoangles (aimdir, dir);
 	AngleVectors (dir, forward, right, up);
-
+	
 	grenade = G_Spawn();
 	VectorCopy (start, grenade->s.origin);
 	VectorScale (aimdir, speed, grenade->velocity);

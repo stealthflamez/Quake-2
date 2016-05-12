@@ -1343,7 +1343,7 @@ void SP_func_door_rotating (edict_t *ent)
 
 /*QUAKED func_water (0 .5 .8) ? START_OPEN
 func_water is a moveable water brush.  It must be targeted to operate.  Use a non-water texture at your own risk.
-
+jo83
 START_OPEN causes the water to move to its destination when spawned and operate in reverse.
 
 "angle"		determines the opening direction (up or down only)
@@ -1403,7 +1403,7 @@ void SP_func_water (edict_t *self)
 	VectorCopy (self->s.angles, self->moveinfo.end_angles);
 
 	self->moveinfo.state = STATE_BOTTOM;
-
+	//jo83 affects speed?
 	if (!self->speed)
 		self->speed = 25;
 	self->moveinfo.accel = self->moveinfo.decel = self->moveinfo.speed = self->speed;

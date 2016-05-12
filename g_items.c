@@ -239,6 +239,7 @@ qboolean Pickup_Bandolier (edict_t *ent, edict_t *other)
 
 qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 {
+	//jo83 changed germade ammo
 	gitem_t	*item;
 	int		index;
 
@@ -249,7 +250,7 @@ qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 	if (other->client->pers.max_rockets < 100)
 		other->client->pers.max_rockets = 100;
 	if (other->client->pers.max_grenades < 100)
-		other->client->pers.max_grenades = 100;
+		other->client->pers.max_grenades = 1;
 	if (other->client->pers.max_cells < 300)
 		other->client->pers.max_cells = 300;
 	if (other->client->pers.max_slugs < 100)
@@ -315,7 +316,7 @@ qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 	return true;
 }
 
-//======================================================================
+//====================================================================== jo83 change to mod stuff
 
 void Use_Quad (edict_t *ent, gitem_t *item)
 {
@@ -432,19 +433,19 @@ qboolean Add_Ammo (edict_t *ent, gitem_t *item, int count)
 
 	if (!ent->client)
 		return false;
-
+	//changed all ammo to grenade jo83
 	if (item->tag == AMMO_BULLETS)
-		max = ent->client->pers.max_bullets;
+		max = ent->client->pers.max_grenades;
 	else if (item->tag == AMMO_SHELLS)
-		max = ent->client->pers.max_shells;
+		max = ent->client->pers.max_grenades;
 	else if (item->tag == AMMO_ROCKETS)
-		max = ent->client->pers.max_rockets;
+		max = ent->client->pers.max_grenades;
 	else if (item->tag == AMMO_GRENADES)
 		max = ent->client->pers.max_grenades;
 	else if (item->tag == AMMO_CELLS)
-		max = ent->client->pers.max_cells;
+		max = ent->client->pers.max_grenades;
 	else if (item->tag == AMMO_SLUGS)
-		max = ent->client->pers.max_slugs;
+		max = ent->client->pers.max_grenades;
 	else
 		return false;
 
@@ -1521,7 +1522,7 @@ always owned, never in the world
 	},
 
 	//
-	// AMMO ITEMS
+	// AMMO ITEMS //jo83 changed all ammo to gernade
 	//
 
 /*QUAKED ammo_shells (.3 .3 1) (-16 -16 -16) (16 16 16)
@@ -1529,44 +1530,43 @@ always owned, never in the world
 	{
 		"ammo_shells",
 		Pickup_Ammo,
-		NULL,
+		Use_Weapon,
 		Drop_Ammo,
-		NULL,
+		Weapon_Grenade,
 		"misc/am_pkup.wav",
-		"models/items/ammo/shells/medium/tris.md2", 0,
-		NULL,
-/* icon */		"a_shells",
-/* pickup */	"Shells",
+		"models/items/ammo/grenades/medium/tris.md2", 0,
+		"models/weapons/v_handgr/tris.md2",
+/* icon */		"a_grenades",
+/* pickup */	"Grenades",
 /* width */		3,
-		10,
+		5,
+		"grenades",
+		IT_AMMO|IT_WEAPON,
+		WEAP_GRENADES,
 		NULL,
-		IT_AMMO,
-		0,
-		NULL,
-		AMMO_SHELLS,
+		AMMO_GRENADES,
 /* precache */ ""
 	},
-
 /*QUAKED ammo_bullets (.3 .3 1) (-16 -16 -16) (16 16 16)
 */
 	{
 		"ammo_bullets",
 		Pickup_Ammo,
-		NULL,
+		Use_Weapon,
 		Drop_Ammo,
-		NULL,
+		Weapon_Grenade,
 		"misc/am_pkup.wav",
-		"models/items/ammo/bullets/medium/tris.md2", 0,
-		NULL,
-/* icon */		"a_bullets",
-/* pickup */	"Bullets",
+		"models/items/ammo/grenades/medium/tris.md2", 0,
+		"models/weapons/v_handgr/tris.md2",
+/* icon */		"a_grenades",
+/* pickup */	"Grenades",
 /* width */		3,
-		50,
+		5,
+		"grenades",
+		IT_AMMO|IT_WEAPON,
+		WEAP_GRENADES,
 		NULL,
-		IT_AMMO,
-		0,
-		NULL,
-		AMMO_BULLETS,
+		AMMO_GRENADES,
 /* precache */ ""
 	},
 
@@ -1575,21 +1575,21 @@ always owned, never in the world
 	{
 		"ammo_cells",
 		Pickup_Ammo,
-		NULL,
+		Use_Weapon,
 		Drop_Ammo,
-		NULL,
+		Weapon_Grenade,
 		"misc/am_pkup.wav",
-		"models/items/ammo/cells/medium/tris.md2", 0,
-		NULL,
-/* icon */		"a_cells",
-/* pickup */	"Cells",
+		"models/items/ammo/grenades/medium/tris.md2", 0,
+		"models/weapons/v_handgr/tris.md2",
+/* icon */		"a_grenades",
+/* pickup */	"Grenades",
 /* width */		3,
-		50,
+		5,
+		"grenades",
+		IT_AMMO|IT_WEAPON,
+		WEAP_GRENADES,
 		NULL,
-		IT_AMMO,
-		0,
-		NULL,
-		AMMO_CELLS,
+		AMMO_GRENADES,
 /* precache */ ""
 	},
 
@@ -1598,21 +1598,21 @@ always owned, never in the world
 	{
 		"ammo_rockets",
 		Pickup_Ammo,
-		NULL,
+		Use_Weapon,
 		Drop_Ammo,
-		NULL,
+		Weapon_Grenade,
 		"misc/am_pkup.wav",
-		"models/items/ammo/rockets/medium/tris.md2", 0,
-		NULL,
-/* icon */		"a_rockets",
-/* pickup */	"Rockets",
+		"models/items/ammo/grenades/medium/tris.md2", 0,
+		"models/weapons/v_handgr/tris.md2",
+/* icon */		"a_grenades",
+/* pickup */	"Grenades",
 /* width */		3,
 		5,
+		"grenades",
+		IT_AMMO|IT_WEAPON,
+		WEAP_GRENADES,
 		NULL,
-		IT_AMMO,
-		0,
-		NULL,
-		AMMO_ROCKETS,
+		AMMO_GRENADES,
 /* precache */ ""
 	},
 
@@ -1621,21 +1621,21 @@ always owned, never in the world
 	{
 		"ammo_slugs",
 		Pickup_Ammo,
-		NULL,
+		Use_Weapon,
 		Drop_Ammo,
-		NULL,
+		Weapon_Grenade,
 		"misc/am_pkup.wav",
-		"models/items/ammo/slugs/medium/tris.md2", 0,
-		NULL,
-/* icon */		"a_slugs",
-/* pickup */	"Slugs",
+		"models/items/ammo/grenades/medium/tris.md2", 0,
+		"models/weapons/v_handgr/tris.md2",
+/* icon */		"a_grenades",
+/* pickup */	"Grenades",
 /* width */		3,
-		10,
+		5,
+		"grenades",
+		IT_AMMO|IT_WEAPON,
+		WEAP_GRENADES,
 		NULL,
-		IT_AMMO,
-		0,
-		NULL,
-		AMMO_SLUGS,
+		AMMO_GRENADES,
 /* precache */ ""
 	},
 

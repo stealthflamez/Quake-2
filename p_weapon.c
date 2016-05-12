@@ -95,12 +95,12 @@ void PlayerNoise(edict_t *who, vec3_t where, int type)
 	gi.linkentity (noise);
 }
 
-
+//change to avoid pick up jo83
 qboolean Pickup_Weapon (edict_t *ent, edict_t *other)
 {
 	int			index;
 	gitem_t		*ammo;
-
+	return false;
 	index = ITEM_INDEX(ent->item);
 
 	if ( ( ((int)(dmflags->value) & DF_WEAPONS_STAY) || coop->value) 
@@ -209,12 +209,12 @@ void ChangeWeapon (edict_t *ent)
 
 /*
 =================
-NoAmmoWeaponChange
+NoAmmoWeaponChange jo83 remove weapon switch
 =================
 */
 void NoAmmoWeaponChange (edict_t *ent)
 {
-	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("slugs"))]
+	/*if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("slugs"))]
 		&&  ent->client->pers.inventory[ITEM_INDEX(FindItem("railgun"))] )
 	{
 		ent->client->newweapon = FindItem ("railgun");
@@ -250,7 +250,7 @@ void NoAmmoWeaponChange (edict_t *ent)
 		ent->client->newweapon = FindItem ("shotgun");
 		return;
 	}
-	ent->client->newweapon = FindItem ("blaster");
+	ent->client->newweapon = FindItem ("blaster");*/
 }
 
 /*

@@ -586,12 +586,13 @@ but is called after each death and level change in deathmatch
 ==============
 */
 void InitClientPersistant (gclient_t *client)
-{
+{	//jo83 max gernade changed start and give blaster
 	gitem_t		*item;
 
 	memset (&client->pers, 0, sizeof(client->pers));
 
-	item = FindItem("Blaster");
+	item = FindItem("Grenades");
+
 	client->pers.selected_item = ITEM_INDEX(item);
 	client->pers.inventory[client->pers.selected_item] = 1;
 
@@ -603,7 +604,7 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.max_bullets	= 200;
 	client->pers.max_shells		= 100;
 	client->pers.max_rockets	= 50;
-	client->pers.max_grenades	= 50;
+	client->pers.max_grenades	= 1;
 	client->pers.max_cells		= 200;
 	client->pers.max_slugs		= 50;
 
@@ -1070,7 +1071,7 @@ void spectator_respawn (edict_t *ent)
 /*
 ===========
 PutClientInServer
-
+jo83 maybe can change speed here
 Called when a player connects to a server or respawns in
 a deathmatch.
 ============
@@ -1560,6 +1561,7 @@ usually be a couple times for each server frame.
 */
 void ClientThink (edict_t *ent, usercmd_t *ucmd)
 {
+
 	gclient_t	*client;
 	edict_t	*other;
 	int		i, j;
@@ -1568,6 +1570,7 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 	level.current_entity = ent;
 	client = ent->client;
 
+	
 	if (level.intermissiontime)
 	{
 		client->ps.pmove.pm_type = PM_FREEZE;
@@ -1601,6 +1604,9 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 			client->ps.pmove.pm_type = PM_NORMAL;
 
 		client->ps.pmove.gravity = sv_gravity->value;
+		//jo83 moon boots change if to bool replace powerup
+		if (ent->flags & FL_BOOTS)
+			client->ps.pmove.gravity = sv_gravity->value * 0.25;
 		pm.s = client->ps.pmove;
 
 		for (i=0 ; i<3 ; i++)
@@ -1732,7 +1738,11 @@ void ClientThink (edict_t *ent, usercmd_t *ucmd)
 		if (other->inuse && other->client->chase_target == ent)
 			UpdateChaseCam(other);
 	}
+
+
 }
+
+
 
 
 /*
