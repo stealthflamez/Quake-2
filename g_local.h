@@ -50,7 +50,7 @@
 #define FL_POWER_ARMOR			0x00001000	// power armor (if any) is active
 #define FL_RESPAWN				0x80000000	// used for item respawning
 #define FL_BOOTS                0x00002000
-//jo83 part 2 moon boots?
+//jo83 part moon boots
 
 
 #define	FRAMETIME		0.1
