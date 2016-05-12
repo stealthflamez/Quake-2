@@ -329,10 +329,12 @@ void Use_Quad (edict_t *ent, gitem_t *item)
 	{
 		timeout = quad_drop_timeout_hack;
 		quad_drop_timeout_hack = 0;
+		 ent->flags -= FL_BOOTS;
 	}
 	else
 	{
 		timeout = 300;
+		 ent->flags |= FL_BOOTS;
 	}
 
 	if (ent->client->quad_framenum > level.framenum)

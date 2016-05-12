@@ -425,12 +425,13 @@ void G_SetStats (edict_t *ent)
 	}
 
 	//
-	// timers
+	// timers JO83
 	//
 	if (ent->client->quad_framenum > level.framenum)
 	{
 		ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex ("p_quad");
 		ent->client->ps.stats[STAT_TIMER] = (ent->client->quad_framenum - level.framenum)/10;
+		 ent->flags -= FL_BOOTS;
 	}
 	else if (ent->client->invincible_framenum > level.framenum)
 	{
